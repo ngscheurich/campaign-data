@@ -3,6 +3,10 @@ require "httparty"
 require "active_support/core_ext/hash"
 
 get "/" do
+  before do
+    response.headers["Access-Control-Allow-Origin"] = "*"
+  end
+
   content_type :json
 
   base_uri = "https://braiservices.dticloud.com/cgi-bin/hm_hm.sh/interface/adplus/lib/interface"
