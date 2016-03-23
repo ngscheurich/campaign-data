@@ -1,0 +1,18 @@
+require "sinatra"
+require "httparty"
+require "active_support/core_ext/hash"
+
+get "/" do
+  base_uri = "https://braiservices.dticloud.com/cgi-bin/hm_hm.sh/interface/adplus/lib/interface"
+  query = {
+    ActionType: "RunProg",
+    ProgName: "MCampaign",
+    ZipCode: request["ZipCode"]
+  }
+
+  response = HTTParty.get(base_uri, query: query)
+
+  xml = response.body
+
+  Hash.from_xml(xml).to_json
+end
