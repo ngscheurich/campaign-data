@@ -13,7 +13,8 @@ get "/" do
   query = {
     ActionType: "RunProg",
     ProgName: "MCampaign",
-    ZipCode: request["ZipCode"]
+    ZipCode: request["ZipCode"],
+    User: "foo"
   }
 
   response = HTTParty.get(base_uri, query: query)
